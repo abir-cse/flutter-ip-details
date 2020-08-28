@@ -4,10 +4,10 @@ class myip {
   final city;
   final lat;
   final lon;
-  final ips;
+  final isp;
   final org;
-  final ips_as;
-  myip ({this.ip, this.country, this.city, this.lat, this.lon, this.ips, this.org, this.ips_as});
+  final isp_as;
+  myip ({this.ip, this.country, this.city, this.lat, this.lon, this.isp, this.org, this.isp_as});
   factory myip.fromJson(final json) {
     return myip(
       ip: json["query"],
@@ -15,9 +15,9 @@ class myip {
       city: json["city"],
       lat: json["lat"],
       lon: json["lon"],
-      ips: json["ips"],
+      isp: json["isp"],
       org: json["org"],
-      ips_as: json["ips_as"]
+      isp_as: json["isp_as"]
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'myip.dart';
@@ -22,8 +21,21 @@ class Home extends StatelessWidget {
           future: getIP(),
           builder: (context, snapshot) {
             final ipData = snapshot.data;
+            final List<String> entries = <String>["IP : "+ipData.ip,"Country : "+ipData.country, "City : "+ipData.city, "Latitude : "+ipData.lat.toString(), "Longitude : "+ipData.lon.toString(), "ISP : "+ipData.isp.toString(), "Org : "+ipData.org.toString(), ];
             if (snapshot.hasData) {
-              return Text("IP : ${ipData.ip}\nCountry : ${ipData.country}\nCity : ${ipData.city}\nLatitude : ${ipData.lat}\nLongitude : ${ipData.lon}\nIPS : ${ipData.ips}\nOrg : ${ipData.org}\nIPS As : ${ipData.ips_as}");
+              return ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: entries.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      height: 50,
+                      color: Colors.black12,
+                      child: Center(child: Text(
+                          '${entries[index]}',
+                      )),
+                    );
+                  }
+              );
             } else if (snapshot.hasError) {
               return Text(snapshot.error.toString());
             }
@@ -44,5 +56,3 @@ Future<myip> getIP() async{
     throw Exception;
   }
 }
-
-
